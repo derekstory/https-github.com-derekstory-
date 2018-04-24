@@ -1,0 +1,5 @@
+private.json
+._.DS_Store
+.gitmodules
+.npmignore
+node_modules/
