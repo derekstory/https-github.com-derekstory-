@@ -14,7 +14,7 @@ const TIME_PER_COMPONENT = 10000;
 lights.init(TOTAL, {
 	// Default. Override with lights.setBrightness()
 	brightness: BRIGHTNESS,
-	dmanum: 10
+	dmanum: 10 // Already changed defaults to 10, but just in case. Ya know?
 });
 
 // Maps the matrix to go TOP to bottom and left to right
@@ -40,6 +40,7 @@ let components = {
 
 let current = 0;
 componentLoop();
+
 function componentLoop() {
 	let total = Object.keys(components).length;
 	let prev = current > 0 ? current - 1 : total - 1;
