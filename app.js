@@ -3,6 +3,7 @@ const alternating = require('./lib/index-mapping/alternating-matrix.js');
 const clock = require('./lib/components/clock.js');
 const weather = require('./lib/components/weather.js');
 const fireplace = require('./lib/components/fireplace.js');
+const transitionBlank = require('./lib/components/transition-blank.js');
 const _ = require('lodash');
 const BRIGHTNESS = 40; // 1 - 255
 const HEIGHT = 16; // Total vertical LEDs
@@ -27,11 +28,7 @@ lights.init(TOTAL, {
 // 4|8|12|16
 lights.setIndexMapping(alternating(HEIGHT, WIDTH));
 
-
-//
-// Delaying the render lights seems to prevent the Rasp-Pi from getting a surge and freezing
-//
-
+// Make it easy to loop through the differnet components.
 let components = {
 	0: clock,
 	1: weather,
@@ -48,6 +45,7 @@ function componentLoop() {
 	components[prev].exit()
 	components[current].render({ lights: lights, pixelData: pixelData });
 	setTimeout(() => {
+		transitionBlank.render({ lights: lights, pixelData: pixelData });
 		componentLoop()
 	}, TIME_PER_COMPONENT);
 	current = next;
